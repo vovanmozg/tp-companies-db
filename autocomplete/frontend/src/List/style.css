@@ -1,0 +1,8 @@
+.companies {
+    margin-top: 5em;
+}
+
+.companies .item {
+    padding: 1em;
+    width: 100%;
+}

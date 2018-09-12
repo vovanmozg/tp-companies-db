@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+  catalog:
+    build: ./catalog
+    command: bash -c "rm -f tmp/pids/server.pid && rake db:mongoid:create_indexes && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./catalog:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - env.catalog
+
+  db:
+    image: mongo
+    environment:
+      - TERM=xterm
+    volumes:
+      - "./db/data/:/data/db"
+    ports:
+      - "27018:27017"
+
+  autocomplete:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: 'bitnami/express:latest'
+    labels:
+      kompose.service.type: nodeport
+    command: npm run development
+    environment:
+      - PORT=3001
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://db:27017/catalog
+      - SKIP_DB_WAIT=0
+      - SKIP_DB_MIGRATION=0
+      - SKIP_NPM_INSTALL=0
+      - SKIP_BOWER_INSTALL=0
+    depends_on:
+      - db
+    ports:
+      - 3001:3001
+    volumes:
+      - ./autocomplete/:/app
+
