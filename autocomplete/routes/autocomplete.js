@@ -8,14 +8,17 @@ router.get('/:term', function (req, res) {
   const collection = db.getDb().collection('companies');
   const search = new RegExp('^' + term, 'i');
 
+
+  const where = {
+    tags: term.substring(0, 3),
+    company_name: { $regex: search }
+  };
+
   return collection
-      .find({
-        $text: { $search: term },
-        company_name: { $regex: search }
-      })
-      .limit(10)
-      .toArray()
-      .then(result => res.json(result));
+    .find(where)
+    .limit(10)
+    .toArray()
+    .then(result => res.json(result));
 
 });
 
