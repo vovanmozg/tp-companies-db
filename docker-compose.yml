@@ -24,7 +24,7 @@ services:
 
   autocomplete:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/express:latest'
+    build: ./autocomplete
     labels:
       kompose.service.type: nodeport
     command: npm run development
