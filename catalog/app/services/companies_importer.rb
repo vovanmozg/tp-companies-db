@@ -10,7 +10,7 @@ class CompaniesImporter
 
   def process
     fetch_snapshot
-    #unzip
+    unzip
     @csv_path = "/app/tmp/BasicCompanyDataAsOneFile-2018-09-01.csv"
     import
   end
@@ -38,61 +38,34 @@ class CompaniesImporter
     @csv_path = "/app/tmp/#{snapshot_name.gsub(/zip$/, 'csv')}"
   end
 
-  # input: { 'Some.Key' => 'Value' }
-  # output: { some: { key: 'Value' } }
-  def row_to_hash(row)
-    company = {}
-    row.headers.each do |key|
-      line_to_hash = lambda do |name, value|
-        first, rest = name.split('.', 2)
-        result_value = rest.nil? ? value : line_to_hash.call(rest, value)
-        { first.strip.to_sym => result_value }
-      end
-      company.deep_merge!(line_to_hash.call(key.underscore, row[key]))
-    end
-    company
-  end
-
   def prepare_to_insert(row)
-    data = row_to_hash(row)
-    {
-      _id: data[:company_number],
-      company_name: data[:company_name],
-      data: data
-    }
+    data = row.headers.map do |k|
+      new_key = k.strip.tr('.', '_').underscore.to_sym
+      new_key = '_id' if new_key == :company_number
+      [new_key, row[k]]
+    end
+
+    data = data.to_h
+    data.merge(
+        tags: [
+            data[:company_name][0],
+            data[:company_name][0..1],
+            data[:company_name][0..2]
+        ]
+    )
   end
 
   def import
-    counter = 0
     start = Time.now
+
     CSV.foreach(@csv_path, headers: true) do |row|
       company = @model.new(prepare_to_insert(row))
       company.upsert
-
-      break if (counter += 1) > 40000
     end
+
     finish = Time.now
     p '--- TIME ---'
     p finish - start
-
-    # return
-    # batch_size = 10_000
-    # counter = 10_000
-    # companies = []
-    # @model.delete_all
-    #
-    # CSV.foreach(@csv_path, headers: true) do |row|
-    #   counter -= 1
-    #   companies << prepare_to_insert(row)
-    #
-    #   next if counter > 0
-    #
-    #   counter = batch_size
-    #   p "insert_many: #{companies.count}"
-    #   @model.collection.insert_many(companies)
-    #   companies = []
-    #
-    # end
   end
 end
 

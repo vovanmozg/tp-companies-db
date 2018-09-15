@@ -5,14 +5,133 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Data</th>
+      <th>Company name</th>
+      <th>Company number</th>
+      <th>Reg address care of</th>
+      <th>Reg address po box</th>
+      <th>Reg address address line1</th>
+      <th>Reg address address line2</th>
+      <th>Reg address post town</th>
+      <th>Reg address county</th>
+      <th>Reg address country</th>
+      <th>Reg address post code</th>
+      <th>Company category</th>
+      <th>Company status</th>
+      <th>Country of origin</th>
+      <th>Dissolution date</th>
+      <th>Incorporation date</th>
+      <th>Accounts account ref day</th>
+      <th>Accounts account ref month</th>
+      <th>Accounts next due date</th>
+      <th>Accounts last made up date</th>
+      <th>Accounts account category</th>
+      <th>Returns next due date</th>
+      <th>Returns last made up date</th>
+      <th>Mortgages num mort charges</th>
+      <th>Mortgages num mort outstanding</th>
+      <th>Mortgages num mort part satisfied</th>
+      <th>Mortgages num mort satisfied</th>
+      <th>Sic code sic text 1</th>
+      <th>Sic code sic text 2</th>
+      <th>Sic code sic text 3</th>
+      <th>Sic code sic text 4</th>
+      <th>Limited partnerships num gen partners</th>
+      <th>Limited partnerships num lim partners</th>
+      <th>Uri</th>
+      <th>Previous name 1 condate</th>
+      <th>Previous name 1 company name</th>
+      <th>Previous name 2 condate</th>
+      <th>Previous name 2 company name</th>
+      <th>Previous name 3 condate</th>
+      <th>Previous name 3 company name</th>
+      <th>Previous name 4 condate</th>
+      <th>Previous name 4 company name</th>
+      <th>Previous name 5 condate</th>
+      <th>Previous name 5 company name</th>
+      <th>Previous name 6 condate</th>
+      <th>Previous name 6 company name</th>
+      <th>Previous name 7 condate</th>
+      <th>Previous name 7 company name</th>
+      <th>Previous name 8 condate</th>
+      <th>Previous name 8 company name</th>
+      <th>Previous name 9 condate</th>
+      <th>Previous name 9 company name</th>
+      <th>Previous name 10 condate</th>
+      <th>Previous name 10 company name</th>
+      <th>Conf stmt next due date</th>
+      <th>Conf stmt last made up date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.company_name %></td>
+        <td><%= company.company_number %></td>
+        <td><%= company.reg_address_care_of %></td>
+        <td><%= company.reg_address_po_box %></td>
+        <td><%= company.reg_address_address_line1 %></td>
+        <td><%= company.reg_address_address_line2 %></td>
+        <td><%= company.reg_address_post_town %></td>
+        <td><%= company.reg_address_county %></td>
+        <td><%= company.reg_address_country %></td>
+        <td><%= company.reg_address_post_code %></td>
+        <td><%= company.company_category %></td>
+        <td><%= company.company_status %></td>
+        <td><%= company.country_of_origin %></td>
+        <td><%= company.dissolution_date %></td>
+        <td><%= company.incorporation_date %></td>
+        <td><%= company.accounts_account_ref_day %></td>
+        <td><%= company.accounts_account_ref_month %></td>
+        <td><%= company.accounts_next_due_date %></td>
+        <td><%= company.accounts_last_made_up_date %></td>
+        <td><%= company.accounts_account_category %></td>
+        <td><%= company.returns_next_due_date %></td>
+        <td><%= company.returns_last_made_up_date %></td>
+        <td><%= company.mortgages_num_mort_charges %></td>
+        <td><%= company.mortgages_num_mort_outstanding %></td>
+        <td><%= company.mortgages_num_mort_part_satisfied %></td>
+        <td><%= company.mortgages_num_mort_satisfied %></td>
+        <td><%= company.sic_code_sic_text_1 %></td>
+        <td><%= company.sic_code_sic_text_2 %></td>
+        <td><%= company.sic_code_sic_text_3 %></td>
+        <td><%= company.sic_code_sic_text_4 %></td>
+        <td><%= company.limited_partnerships_num_gen_partners %></td>
+        <td><%= company.limited_partnerships_num_lim_partners %></td>
+        <td><%= company.uri %></td>
+        <td><%= company.previous_name_1_condate %></td>
+        <td><%= company.previous_name_1_company_name %></td>
+        <td><%= company.previous_name_2_condate %></td>
+        <td><%= company.previous_name_2_company_name %></td>
+        <td><%= company.previous_name_3_condate %></td>
+        <td><%= company.previous_name_3_company_name %></td>
+        <td><%= company.previous_name_4_condate %></td>
+        <td><%= company.previous_name_4_company_name %></td>
+        <td><%= company.previous_name_5_condate %></td>
+        <td><%= company.previous_name_5_company_name %></td>
+        <td><%= company.previous_name_6_condate %></td>
+        <td><%= company.previous_name_6_company_name %></td>
+        <td><%= company.previous_name_7_condate %></td>
+        <td><%= company.previous_name_7_company_name %></td>
+        <td><%= company.previous_name_8_condate %></td>
+        <td><%= company.previous_name_8_company_name %></td>
+        <td><%= company.previous_name_9_condate %></td>
+        <td><%= company.previous_name_9_company_name %></td>
+        <td><%= company.previous_name_10_condate %></td>
+        <td><%= company.previous_name_10_company_name %></td>
+        <td><%= company.conf_stmt_next_due_date %></td>
+        <td><%= company.conf_stmt_last_made_up_date %></td>
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+
+<br>
+<%= paginate @companies %>
 
 <br>
 
