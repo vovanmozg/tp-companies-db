@@ -27,7 +27,6 @@ services:
     build: ./autocomplete
     labels:
       kompose.service.type: nodeport
-    command: npm run development
     environment:
       - PORT=3001
       - NODE_ENV=development

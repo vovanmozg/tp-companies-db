@@ -1,6 +1,4 @@
-## Dockerfile for building production image
 FROM bitnami/express:4.16.3-debian-9-r48
-LABEL maintainer "John Smith <john.smith@acme.com>"
 
 ENV DISABLE_WELCOME_MESSAGE=1
 
@@ -15,11 +13,9 @@ ENV SKIP_DB_WAIT=0 \
 
 USER root
 COPY . /app
-
-RUN npm install
+WORKDIR /app
 
 EXPOSE 3000
-CMD ["cd", "frontend"]
-CMD ["webpack"]
-CMD ["cd", ".."]
-CMD ["npm", "start"]
+
+CMD ["./start.sh"]
+
