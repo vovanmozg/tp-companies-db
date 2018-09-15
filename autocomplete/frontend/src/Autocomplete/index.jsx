@@ -28,7 +28,7 @@ class Autocompolete extends React.Component {
     const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
     };
-    axios.get(`http://localhost:3001/autocomplete/${term}`, config)
+    axios.get(`/autocomplete/${term}`, config)
         .then( (response) => {
           this.setState({ companies: response.data })
         })
